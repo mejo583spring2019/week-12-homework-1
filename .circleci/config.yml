@@ -5,6 +5,6 @@ jobs:
       - image: circleci/node
     steps:
       - checkout
-      - run: cd bulletin-board && npm i
-      - run: cd bulletin-board && npm i eslint eslint-config-google
-      - run: cd bulletin-board && npx eslint -c ../.eslintrc.json .
+      - run: cd $(find . -maxdepth 2  -name package.json | cut -d '/' -f 2) && npm i
+      - run: cd $(find . -maxdepth 2  -name package.json | cut -d '/' -f 2) && npm i eslint eslint-config-google
+      - run: cd $(find . -maxdepth 2  -name package.json | cut -d '/' -f 2) && npx eslint -c ../.eslintrc.json .
