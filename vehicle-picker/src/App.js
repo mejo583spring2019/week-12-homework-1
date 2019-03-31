@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import Car from "./Car";
 
 class App extends Component {
   constructor(props) {
@@ -106,7 +107,7 @@ class App extends Component {
           that has the ID {this.state.modelSelected}.
           </div>
         </div>
-
+        <Car />
       </div >
     );
   }
