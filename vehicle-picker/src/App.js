@@ -78,7 +78,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>
+        <div className="App__selector">
           <select onChange={this.handleYearSelect.bind(this)}>
             <option value="">Year</option>
             {this.getYearOptions()}
@@ -99,13 +99,14 @@ class App extends Component {
             <option value="">Model</option>
             {this.getModelOptions()}
           </select>
-        </div>
-        <div>
-          You selected a {this.state.yearSelected} &nbsp;
-          {this.state.makeSelected} &nbsp;
-          {this.state.modelName} &nbsp;
+          <div>
+            You selected a {this.state.yearSelected} &nbsp;
+            {this.state.makeSelected} &nbsp;
+            {this.state.modelName} &nbsp;
           that has the ID {this.state.modelSelected}.
+          </div>
         </div>
+
       </div >
     );
   }
