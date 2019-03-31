@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: cd $(find . -maxdepth 2  -name package.json | cut -d '/' -f 2) && npm i
+      - run: cd $(find . -maxdepth 2  -name package.json | cut -d '/' -f 2) && npm i eslint eslint-config-google
+      - run: cd $(find . -maxdepth 2  -name package.json | cut -d '/' -f 2) && npx eslint -c ../.eslintrc.json .
