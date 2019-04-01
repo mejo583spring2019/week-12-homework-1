@@ -42,9 +42,9 @@ class App extends Component {
       const make = this.state.makeSelected;
       const yearData = this.state.yearMakeModel[year];
       const makeData = yearData[make];
-      console.log("year is", year);
-      console.log("make is", make);
-      console.log("make Data", makeData);
+      // console.log("year is", year);
+      // console.log("make is", make);
+      // console.log("make Data", makeData);
       return Object.keys(makeData).map(
           (k) => <option key={makeData[k]} value={makeData[k]}>{k}</option>
       );
