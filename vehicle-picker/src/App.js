@@ -9,6 +9,7 @@ class App extends Component {
       yearSelected: "",
       makeSelected: "",
       modelSelected: "",
+      modelName: "",
     };
   }
 
@@ -27,20 +28,23 @@ class App extends Component {
 
   getMakeOptions() {
     if (this.state.yearSelected) {
-      const yearData = this.state.yearMakeModel[this.state.yearSelected];
+      const year = this.state.yearSelected;
+      const yearData = this.state.yearMakeModel[year];
       return Object.keys(yearData).map((k) =>
-        <option key ={k} value={k}>{k}</option>
+        <option key ={k + year} value={k}>{k}</option>
       );
     }
     return [];
   }
 
   getModelOptions() {
-    if (this.state.makeSelected && this.state.yearSelected) {
-      const yearData = this.state.yearMakeModel[this.state.yearSelected];
-      const makeData = yearData[this.state.makeSelected];
-      return Object.keys(makeData).map((k) =>
-        <option key ={k} value={k}>{k}</option>
+    if (this.state.makeSelected !=="" && this.state.yearSelected !=="") {
+      const year = this.state.yearSelected;
+      const make = this.state.makeSelected;
+      const yearData = this.state.yearMakeModel[year];
+      const makeData = yearData[make];
+      return Object.keys(makeData).map(
+          (k) => <option key ={makeData[k]} value={makeData[k]}>{k}</option>
       );
     }
     return [];
@@ -58,12 +62,15 @@ class App extends Component {
     this.setState({
       makeSelected: evt.target.value,
       modelSelected: "",
+      modelName: "",
     });
   }
 
   handleModelSelect(evt) {
     this.setState({
       modelSelected: evt.target.value,
+      modelName: evt.target[evt.target.selectedIndex].text,
+
     });
   }
 
@@ -78,29 +85,32 @@ class App extends Component {
             {this.getYearOptions()}
           </select>
 
-
           <select
             disabled={!this.state.yearSelected}
             onChange={this.handleMakeSelect.bind(this)}
           >
-            <option>Make</option>
+            <option value="">Make</option>
             {this.getMakeOptions()}
           </select>
-
 
           <select
             disabled={!this.state.yearSelected || !this.state.makeSelected}
             onChange={this.handleModelSelect.bind(this)}
           >
-            <option>Model</option>
+            <option value="">Model</option>
             {this.getModelOptions()}
           </select>
 
         </div>
-
+        <div>You selected the {this.state.yearSelected} &nbsp;
+          {this.state.makeSelected} &nbsp;
+          {this.state.modelName} &nbsp;
+          with the ID {this.state.modelSelected}.
+        </div>
       </div>
     );
   }
 }
+
 
 export default App;
