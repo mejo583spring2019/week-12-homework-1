@@ -11,6 +11,7 @@ class Car extends Component {
       modelSelected: "",
       modelName: "",
       yearsOperated: "",
+      yearsInJSON: "",
     };
   }
 
@@ -60,7 +61,17 @@ class Car extends Component {
       const yearDifference = currYear - firstYear;
       return yearDifference;
     }
+    return "";
+  }
 
+  getNoOfYearsinJSON() {
+    if (this.state.makeSelected) {
+      const make = this.state.makeSelected;
+      const makeLength = this.state.makeYearModel[make];
+      const years = Object.keys(makeLength);
+      const size = years.length;
+      return size;
+    }
     return "";
   }
 
@@ -95,6 +106,11 @@ class Car extends Component {
     });
   }
 
+  handleJsonYearData(evt) {
+    this.setState({
+      yearsInJSON: evt.target.value,
+    });
+  }
 
   render() {
     return (
@@ -105,7 +121,7 @@ class Car extends Component {
           <option value="">Make</option>
           {this.getMakeOptions()}
         </select> &nbsp; to see how long they have been
-              in business and what types of cars they offer.
+                      in business and what types of cars they offer.
         </h2>
         <h3>{this.state.makeSelected} has been around for
         &nbsp;<span
@@ -113,6 +129,9 @@ class Car extends Component {
             onChange="{this.handleYearLength.bind(this)}"
           >
             {this.getYearLength()}</span>&nbsp; years.
+            We have data for <span onChange="{this.handleJsonYearData.bind(this)}">
+            {this.getNoOfYearsinJSON()}
+          </span>&nbsp; years
         </h3>
 
         <select
@@ -135,6 +154,8 @@ class Car extends Component {
           So, when you play this "Mad Libs", you'll have some information that
           dynamically gets loaded into it
           (such as # of years, # of models, etc)
+          Additonally, the information may be inaccurate because some
+          car manufacturers have went out of business.
         </p>
       </div>
     );
