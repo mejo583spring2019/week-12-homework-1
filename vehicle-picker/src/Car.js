@@ -10,6 +10,7 @@ class Car extends Component {
       makeSelected: "",
       modelSelected: "",
       modelName: "",
+      yearsOperated: "",
     };
   }
 
@@ -49,6 +50,20 @@ class Car extends Component {
     return [];
   }
 
+  getYearLength() {
+    if (this.state.makeSelected) {
+      const make = this.state.makeSelected;
+      const makeLength = this.state.makeYearModel[make];
+      const years = Object.keys(makeLength);
+      const firstYear = years[0];
+      const currYear = 2019;
+      const yearDifference = currYear - firstYear;
+      return yearDifference;
+    }
+
+    return "";
+  }
+
   handleMakeSelect(evt) {
     this.setState({
       yearSelected: "",
@@ -74,18 +89,31 @@ class Car extends Component {
     });
   }
 
+  handleYearLength(evt) {
+    this.setState({
+      yearsOperated: evt.target.value,
+    });
+  }
+
 
   render() {
     return (
       <div className="App__section2">
         <h2>In the beginning, there were only a few car manufacturers.
-          Today, there are hundreds. Choose a manufacturer:
+          Today, there are hundreds. Choose a manufacturer:&nbsp;
         <select onChange={this.handleMakeSelect.bind(this)}>
           <option value="">Make</option>
           {this.getMakeOptions()}
-        </select> &nbsp; to see how long they have been in business and what
-          types of cars they offer.
+        </select> &nbsp; to see how long they have been
+              in business and what types of cars they offer.
         </h2>
+        <h3>{this.state.makeSelected} has been around for
+        &nbsp;<span
+            value="{this.yearsOperated}"
+            onChange="{this.handleYearLength.bind(this)}"
+          >
+            {this.getYearLength()}</span>&nbsp; years.
+        </h3>
 
         <select
           disabled={!this.state.makeSelected}
