@@ -1,4 +1,4 @@
-# Don't include .env files
+# Don't include .env files 
 .env
 
 # Just incase glitch messes up
