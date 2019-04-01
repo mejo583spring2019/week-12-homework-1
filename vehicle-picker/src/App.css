@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+.App {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 5% 45% 45% 5%;
+  grid-template-rows: 10vh 80vh;
+  grid-template-areas: 
+    '. selector selector .'
+    '. section2 section2 .';
+}
+
+.App select {
+  font-family: inherit;
+}
+
+.App__selector {
+  grid-area: selector;
+  padding: 2vh 0;
+}
+
+.App__section2 {
+  grid-area: section2;
+}
+
+.App__section2 select {
+  font-size: 1.3rem;
+  font-weight: bolder;
+  border-color: rgba(0, 0,0,0);
+  border-bottom: solid 3px #4B9CD3; 
+  cursor: pointer;
+}
+
+.App__section2 span {
+  border-bottom: solid 3px #4B9CD3; 
+}
