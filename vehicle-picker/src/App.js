@@ -7,6 +7,8 @@ class App extends Component {
     this.state = {
       yearMakeModel: {},
       yearSelected: "",
+      makeSelected: "",
+      modelSelected: "",
     };
   }
 
@@ -23,9 +25,45 @@ class App extends Component {
     );
   }
 
+  getMakeOptions() {
+    if (this.state.yearSelected) {
+      const yearData = this.state.yearMakeModel[this.state.yearSelected];
+      return Object.keys(yearData).map((k) =>
+        <option key ={k} value={k}>{k}</option>
+      );
+    }
+    return [];
+  }
+
+  getModelOptions() {
+    if (this.state.makeSelected && this.state.yearSelected) {
+      const yearData = this.state.yearMakeModel[this.state.yearSelected];
+      const makeData = yearData[this.state.makeSelected];
+      return Object.keys(makeData).map((k) =>
+        <option key ={k} value={k}>{k}</option>
+      );
+    }
+    return [];
+  }
+
   handleYearSelect(evt) {
     this.setState({
       yearSelected: evt.target.value,
+      modelSelected: "",
+      makeSelected: "",
+    });
+  }
+
+  handleMakeSelect(evt) {
+    this.setState({
+      makeSelected: evt.target.value,
+      modelSelected: "",
+    });
+  }
+
+  handleModelSelect(evt) {
+    this.setState({
+      modelSelected: evt.target.value,
     });
   }
 
@@ -34,18 +72,30 @@ class App extends Component {
     return (
       <div className="App">
         <div>
+
           <select onChange={this.handleYearSelect.bind(this)}>
             <option value="">Year</option>
             {this.getYearOptions()}
           </select>
 
-          <select disabled={!this.state.yearSelected}>
+
+          <select
+            disabled={!this.state.yearSelected}
+            onChange={this.handleMakeSelect.bind(this)}
+          >
             <option>Make</option>
+            {this.getMakeOptions()}
           </select>
 
-          <select disabled={!this.state.yearSelected}>
+
+          <select
+            disabled={!this.state.yearSelected || !this.state.makeSelected}
+            onChange={this.handleModelSelect.bind(this)}
+          >
             <option>Model</option>
+            {this.getModelOptions()}
           </select>
+
         </div>
 
       </div>
