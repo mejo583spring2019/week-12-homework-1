@@ -7,6 +7,10 @@ class App extends Component {
     this.state = {
       yearMakeModel: {},
       yearSelected: "",
+      makeSelected: "",
+      modelSelected: "",
+      modelName: "",
+
     };
   }
   componentDidMount() {
@@ -21,10 +25,49 @@ class App extends Component {
     );
     // we use map since it's going to return something (forEach doesn't)
   }
+
+  getMakeOptions() {
+    if (this.state.yearSelected) {
+      const year = this.state.yearSelected;
+      const yearData = this.state.yearMakeModel[year];
+      return Object.keys(yearData).map(
+          (k) => <option key={k + year} value={k}>{k}</option>
+      );
+      // we use map since it's going to return something (forEach doesn't)
+    }
+    return [];
+  }
+  getModelOptions() {
+    if (this.state.makeSelected && this.state.yearSelected) {
+      const year = this.state.yearSelected;
+      const make = this.state.makeSelected;
+      const yearData = this.state.yearMakeModel[year];
+      const makeData = yearData[make];
+      return Object.keys(makeData).map(
+          (k) => <option key={makeData[k]} value={k}>{k}</option>
+      );
+      // we use map since it's going to return something (forEach doesn't)
+    }
+    return [];
+  }
   handleYearSelect(evt) {
-    console.log("Year selection changed", evt.target.value);
     this.setState({
       yearSelected: evt.target.value,
+      modelSelected: "",
+      makeSelected: "",
+    });
+  }
+  handleMakeSelect(evt) {
+    this.setState({
+      makeSelected: evt.target.value,
+      modelSelected: "",
+    });
+  }
+  handleModelSelect(evt) {
+    this.setState({
+      modelSelected: evt.target.value,
+      modelName: evt.target.innerHTML,
+
     });
   }
   render() {
@@ -35,12 +78,26 @@ class App extends Component {
             <option value="">Year</option>
             {this.getYearOptions()}
           </select>
-          <select disabled={!this.state.yearSelected}>
+          <select
+            disabled={!this.state.yearSelected}
+            onChange={this.handleMakeSelect.bind(this)}>
+            >
             <option>Make</option>
+            {this.getMakeOptions()}
           </select>
-          <select disabled={!this.state.yearSelected}>
+          <select
+            disabled={!this.state.yearSelected || !this.state.makeSelected}
+            onChange={this.handleModelSelect.bind(this)}>
             <option>Model</option>
+            {this.getModelOptions()}
           </select>
+        </div>
+        <div>
+          You selected {this.state.yearSelected} &nbsp;
+          {this.state.makeSelected} &nbsp;
+          {this.state.modelName} &nbsp;
+          that has the ID {this.state.modelSelected}
+
 
         </div>
       </div>
