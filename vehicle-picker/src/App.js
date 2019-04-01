@@ -38,13 +38,13 @@ class App extends Component {
     return [];
   }
   getModelOptions() {
-    if (this.state.makeSelected && this.state.yearSelected) {
+    if (this.state.makeSelected !== "" && this.state.yearSelected !== "") {
       const year = this.state.yearSelected;
       const make = this.state.makeSelected;
       const yearData = this.state.yearMakeModel[year];
       const makeData = yearData[make];
       return Object.keys(makeData).map(
-          (k) => <option key={makeData[k]} value={k}>{k}</option>
+          (k) => <option key={makeData[k]} value={makeData[k]}>{k}</option>
       );
       // we use map since it's going to return something (forEach doesn't)
     }
@@ -61,12 +61,13 @@ class App extends Component {
     this.setState({
       makeSelected: evt.target.value,
       modelSelected: "",
+      modelName: "",
     });
   }
   handleModelSelect(evt) {
     this.setState({
       modelSelected: evt.target.value,
-      modelName: evt.target.innerHTML,
+      modelName: evt.target[evt.target.selectedIndex].text,
 
     });
   }
@@ -82,13 +83,13 @@ class App extends Component {
             disabled={!this.state.yearSelected}
             onChange={this.handleMakeSelect.bind(this)}>
             >
-            <option>Make</option>
+            <option value="">Make</option>
             {this.getMakeOptions()}
           </select>
           <select
             disabled={!this.state.yearSelected || !this.state.makeSelected}
             onChange={this.handleModelSelect.bind(this)}>
-            <option>Model</option>
+            <option value="">Model</option>
             {this.getModelOptions()}
           </select>
         </div>
