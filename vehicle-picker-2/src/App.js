@@ -20,9 +20,11 @@ class App extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     const data = this.state;
-    const inputNum = data.inputName;
-    // const inputNum = parseInt(inputStr);
+    const inputStr = data.inputName;
+    const inputNum = parseInt(inputStr);
     const test = this.state.idYearMakeModel[this.state.inputName];
+    // const test = this.state.idYearMakeModel[this.state.inputName][1957].BMW;
+    // when 12 is entered, the year is 1957 and make is BMW. I can't figure out how to create a function to access this naturally
     console.log(inputNum);
     console.log(test);
   }
@@ -43,6 +45,9 @@ class App extends Component {
           <input type="text" name="inputName" value={inputName} onChange={this.handleInputChange}></input>
           <input type="submit" value="submit"></input>
         </form>
+        <div>
+          The ID you entered corresponds to
+        </div>
       </div>
     );
   }
