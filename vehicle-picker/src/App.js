@@ -6,6 +6,7 @@ class App extends Component {
     super(props);
     this.state = {
       yearMakeModel: {},
+      makeYearModel: {},
       yearSelected: "",
       makeSelected: "",
       modelSelected: "",
@@ -18,6 +19,13 @@ class App extends Component {
         .then((res) => res.json())
         .then((json) => this.setState({ yearMakeModel: json }));
   }
+  // my example
+  componentIndependentDidMount() {
+    fetch("/bymake.json")
+        .then((res) => res.json())
+        .then((json) => this.setState({ MakeYearModel: json }));
+  }
+
 
   getYearOptions() {
     return Object.keys(this.state.yearMakeModel).map(
