@@ -90,15 +90,14 @@ class Car extends Component {
         </h3>
         <p>Reason for doing a selector this way: When I created my second tree,
           I grouped it from Make, Year, and Model.
-          So, when you play this "Mad Libs", you'll have some information that
+          So, when you pick a manufacturer, you'll have some information that
           dynamically gets loaded into it
           (such as # of years, # of models, etc)
         </p>
         <p>
-          Additonally, the information may be inaccurate because some
-          car manufacturers have went out of business.
+          Additonally, the dataset is imcomplete.
           If we only have data for a car manufacturer
-          for a small number of  years,
+          for a small number of years,
           then it could be assumed the manufacturer is no longer in business.
         </p>
       </div>
