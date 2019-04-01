@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const dataUrl = "https://gist.githubusercontent.com/leetrout/06691832f46d91ea0d533b5280467491/raw/cca39786bcddd93a4aebe88ade03b5c9f33b1fb0/vehicle_flat.json";
 
-let fullFinalData;
+// let fullFinalData;
 
 function makeTree(fullData) {
   let makeData;
@@ -34,9 +34,9 @@ function makeTree(fullData) {
     finalData[record.model] = modelData;
 
 
-    console.log(finalData.Venza);
+    // console.log(finalData.Venza);
   });
-  fullFinalData = finalData;
+  //   fullFinalData = finalData;
 }
 
 function writeJSONfile(fileName, fullData) {
