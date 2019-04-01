@@ -11,7 +11,7 @@ function makeTree(fullData) {
       makeData = {};
     }
     const strYear = String(r.year);
-    let yearData = strYear.makeData[r.year];
+    let yearData = strYear.makeYear[r.year];
     if (yearData === undefined) {
       yearData = {};
     }
