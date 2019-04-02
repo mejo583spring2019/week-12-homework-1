@@ -30,18 +30,19 @@ function makeTree(fullData) {
   return byYear;
 }
 
-function writeJSONFile(fullData) {
+function writeJSONFile(filename, fullData) {
   const data = makeTree(fullData);
   const jsonData = JSON.stringify(data);
-  fs.writeFileSync("byyear.json", jsonData, "utf8");
+  fs.writeFileSync(filename, jsonData, "utf8");
 }
 
 function main() {
   process.stdout.write(`Loading data from ${dataURL}\n`);
+  const filename = "public/byyear.json";
   fetch(dataURL)
       .then((res) => res.json())
-      .then((json) => writeJSONFile(json));
-  process.stdout.write("finished\n");
+      .then((json) => writeJSONFile(filename, json));
+  process.stdout.write(`Data written to ${filename}\n`);
 }
 
 main();
