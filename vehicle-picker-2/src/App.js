@@ -6,6 +6,7 @@ class App extends Component {
     super(props);
     this.state = {
       inputName: "",
+      selectedVehicle: "",
       idYearMakeModel: {},
     };
   }
@@ -27,6 +28,9 @@ class App extends Component {
     // when 12 is entered, the year is 1957 and make is BMW. I can't figure out how to create a function to access this naturally
     console.log(inputNum);
     console.log(test);
+    this.setState({
+      selectedVehicle: test,
+    });
   }
 
   handleInputChange = (evt) => {
@@ -34,6 +38,16 @@ class App extends Component {
     this.setState({
       [evt.target.name]: evt.target.value,
     });
+  }
+
+  getVehicleDisplay() {
+    const year = Object.keys(this.state.selectedVehicle)[0];
+    if (year === undefined) {
+      return;
+    }
+    const make = Object.keys(this.state.selectedVehicle[year])[0];
+    const model = this.state.selectedVehicle[year][make];
+    return year + make + model;
   }
 
   render() {
@@ -47,6 +61,7 @@ class App extends Component {
         </form>
         <div>
           The ID you entered corresponds to
+          {this.getVehicleDisplay()}
         </div>
       </div>
     );
