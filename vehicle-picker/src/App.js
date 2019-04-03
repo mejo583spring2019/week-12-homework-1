@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   getModelOptions() {
-    if (this.state.makeSelected && this.state.yearSelected) {
+    if (this.state.makeSelected !== "" && this.state.yearSelected !== "") {
       const make = this.state.makeSelected;
       const year = this.state.yearSelected;
       const yearData = this.state.yearMakeModel[year];
@@ -51,12 +51,14 @@ class App extends Component {
     this.setState({
       yearSelected: evt.target.value,
       modelSelected: "",
+      modelName: "",
       makeSelected: "",
     });
   }
   handleMakeSelect(evt) {
     this.setState({
       makeSelected: evt.target.value,
+      modelName: "",
       modelSelected: "",
     });
   }
@@ -80,7 +82,7 @@ class App extends Component {
           <select
             disabled={!this.state.yearSelected}
             onChange={this.handleMakeSelect.bind(this)}>
-            <option>Make</option>
+            <option value="">Make</option>
             {this.getMakeOptions()}
           </select>
 
@@ -88,7 +90,7 @@ class App extends Component {
             disabled={!this.state.yearSelected || !this.state.makeSelected}
             onChange={this.handleModelSelect.bind(this)}
           >
-            <option>Model</option>
+            <option value="">Model</option>
             {this.getModelOptions()}
           </select>
         </div>
