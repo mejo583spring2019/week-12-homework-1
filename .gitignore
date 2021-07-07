@@ -1,4 +1,7 @@
-# Don't include .env files
+# don't include vscode workspace settings
+.vscode
+
+# Don't include .env files 
 .env
 
 # Just incase glitch messes up

@@ -24,3 +24,5 @@ Set your workspace setting in VS Code to use the included file by ensuring you h
 Don't forget to uninstall or disable the beautify extension if you have it installed.
 
 Open the command palatte and run `reload window` or manually restart VS Code to load the new configuration.
+
+.
